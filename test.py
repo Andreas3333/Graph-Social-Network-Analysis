@@ -1,4 +1,5 @@
 import pandas as pd
+#import dtw
 #from scipy import cluster as cl
 
 '''
@@ -20,9 +21,9 @@ f.write(str)
 
 
 
-df = pd.read_csv('final_Dataset.c`sv', sep=',', lineterminator='\n')
+df = pd.read_csv('final_Dataset.csv', sep=',', lineterminator='\n')
 
-name_arr = df.get('Name') #get() returns pandas.Series obj
+name_arr = df.get('Name') #get() returns pandas.Series obj, array containing all company names in dataset
 
 name_arr.drop_duplicates(inplace = True) #inplace ensures a new obj is not returned, rather duplicate values are removed on the passed obj 
 
@@ -30,15 +31,17 @@ i = 0
 j = name_arr.size
 while j >= 0:
     print(i)
-    str_1 = str(name_arr[i])
-    company = df.query("Courses == str_1")
-    #company = df[df['Name'] == name_arr[i]]
-    if(i == 1):
-        print(i)
-    f = open('datasets/%s.csv' % name_arr[i], 'w')
-    str = company.to_string() #change df type obj to str, only string type data can be written to file
-    f.write(str)
+    str_1 = name_arr[i].to_string()
+    print(str_1)
+    
+    #company = df.query('Name == str_1', inplace=False) #inplace=False: do not make changes to original dataframe(default behavior)
+    
+    company = df[df['Name'] == str_1]
+    
+    f = open('datasets/%s.csv' % str_1, 'w')
+    fill = company.to_string() #change df type obj to str, only string type data can be written to file
+    f.write(fill)
     f.close()
     j -= 1
-    i += 1
+    i += 1 
 print('Done')
