@@ -1,6 +1,7 @@
 import pandas as pd
 from dtwParallel import dtw_functions
-'''
+
+"""
 get all values of name column and store in series object,
 reduce series object to contain single instances of the name value called (name_arr),
 then 
@@ -19,15 +20,19 @@ f = open("basic_stock_dataset.csv", "w")
 str = str(df)
 f.write(str)
 ////////////////////////////////////////////
-'''
+"""
 
-df = pd.read_csv('final_Dataset.csv', sep=',', lineterminator='\n')
+df = pd.read_csv("final_Dataset.csv", sep=",", lineterminator="\n")
 
-name_arr = df.get('Name') #get() returns pandas.Series obj, array containing all company names in dataset
+name_arr = df.get(
+    "Name"
+)  # get() returns pandas.Series obj, array containing all company names in dataset
 
-name_arr.drop_duplicates(inplace = True) #inplace ensures a new obj is not returned, rather duplicate values are removed on the passed obj 
+name_arr.drop_duplicates(
+    inplace=True
+)  # inplace ensures a new obj is not returned, rather duplicate values are removed on the passed obj
 
-'''
+"""
 for i in name_arr:
     print(i)
 
@@ -38,7 +43,8 @@ for i in name_arr:
     f.write(fill)
     f.close()
 print('Done')
-
+"""
+"""
 class Input:
     def __init__(self):
         self.check_errors = False 
@@ -52,17 +58,18 @@ class Input:
         self.sigma_kernel = 1
 
 input_obj = Input()
-'''
+"""
 for i in name_arr:
-    for j in name_arr + 1:
-        company_a = df[df['Name'] == i]
-        company_b = df[df['Name'] == j]
+    for j in name_arr:
+        if j != i:
+            company_a = df[df["Name"] == i]
+            company_b = df[df["Name"] == j]
 
-        f = open('dist-sim-test/%s.csv' % i, 'w')
-        # API call. 
-        fill = dtw_functions.dtw_ind(company_a, company_b, 0, False)
-        fill.to_string()
-        f.write(fill)
-        f.close()
+            f = open("dist-sim-test/%s.csv" % i, "w")
+            # API call.
+            fill = dtw_functions.dtw_ind(company_a, company_b, 0, False)
+            fill.to_string()
+            f.write(fill)
+            f.close()
 
-print('Done')
+print("Done")
