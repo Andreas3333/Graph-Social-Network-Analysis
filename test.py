@@ -24,6 +24,8 @@ f.write(str)
 
 df = pd.read_csv("final_Dataset.csv", sep=",", lineterminator="\n")
 
+dfInfoTech = df[df["Sector"] == "Information Technology"]
+
 name_arr = df.get(
     "Name"
 )  # get() returns pandas.Series obj, array containing all company names in dataset
@@ -44,6 +46,7 @@ for i in name_arr:
     f.close()
 print('Done')
 """
+
 """
 class Input:
     def __init__(self):
@@ -59,6 +62,7 @@ class Input:
 
 input_obj = Input()
 """
+"""
 for i in name_arr:
     for j in name_arr:
         if j != i:
@@ -73,3 +77,4 @@ for i in name_arr:
             f.close()
 
 print("Done")
+"""
