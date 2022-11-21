@@ -20,14 +20,14 @@ str = str(df)
 f.write(str)
 ////////////////////////////////////////////
 '''
-
+'''
 df = pd.read_csv('final_Dataset.csv', sep=',', lineterminator='\n')
 
 name_arr = df.get('Name') #get() returns pandas.Series obj, array containing all company names in dataset
 
 name_arr.drop_duplicates(inplace = True) #inplace ensures a new obj is not returned, rather duplicate values are removed on the passed obj 
 
-'''
+
 for i in name_arr:
     print(i)
 
@@ -53,16 +53,26 @@ class Input:
 
 input_obj = Input()
 '''
-for i in name_arr:
-    for j in name_arr + 1:
-        company_a = df[df['Name'] == i]
-        company_b = df[df['Name'] == j]
+#restrict data to only first 5 companies of the same sector
+#read in csv data files datasets dir
+#create df objs of each file
+#extract open attribute from df objects and store in arr to send to dtw_ind
 
-        f = open('dist-sim-test/%s.csv' % i, 'w')
-        # API call. 
-        fill = dtw_functions.dtw_ind(company_a, company_b, 0, False)
-        fill.to_string()
-        f.write(fill)
-        f.close()
+company_a = []
+company_b = []
+for i in df:
+    for j in df:
+    j += 1
+    company_a = df[df['Open'] == i]
+    company_b = df[df['Open'] == j]
+
+
+    f = open('/%s.csv' % i, 'w')
+    # API call. 
+    dist_arr = dtw_functions.dtw_ind(company_a, company_b, 0, False)
+
+
+#agregate distance arrays of companies in to a distance matrix
+#transform distance array into adj list
 
 print('Done')
