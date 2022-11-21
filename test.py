@@ -24,8 +24,6 @@ f.write(str)
 
 df = pd.read_csv("final_Dataset.csv", sep=",", lineterminator="\r")
 
-dfInfoTech = df[df["Sector"] == "Information Technology"]
-
 name_arr = df.get(
     "Name"
 )  # get() returns pandas.Series obj, array containing all company names in dataset
@@ -62,15 +60,10 @@ class Input:
 
 input_obj = Input()
 """
-for i in name_arr:
-    company = df[(df["Name"] == i) & (df["Sector"] == "Information Technology")]
-    f = open("infoTech_datasets/%s.csv" % i, "w")
-    fill = (
-        company.to_string()
-    )  # change df type obj to str, only string type data can be written to file
-    f.write(fill)
-    f.close()
-print("Done")
+
+infoTech = df[df["Sector"] == "Information Technology"]
+infoTech.drop_duplicates(inplace=True)
+print(infoTech["Name"].to_string())
 
 """
 for i in name_arr:
