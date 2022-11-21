@@ -22,7 +22,7 @@ f.write(str)
 ////////////////////////////////////////////
 """
 
-df = pd.read_csv("final_Dataset.csv", sep=",", lineterminator="\n")
+df = pd.read_csv("final_Dataset.csv", sep=",", lineterminator="\r")
 
 dfInfoTech = df[df["Sector"] == "Information Technology"]
 
@@ -33,20 +33,20 @@ name_arr = df.get(
 name_arr.drop_duplicates(
     inplace=True
 )  # inplace ensures a new obj is not returned, rather duplicate values are removed on the passed obj
-
 """
 for i in name_arr:
     print(i)
 
-    company = df[df['Name'] == i]
-    
-    f = open('datasets/%s.csv' % i, 'w')
-    fill = company.to_string() #change df type obj to str, only string type data can be written to file
+    company = df[df["Name"] == i]
+
+    f = open("datasets/%s.csv" % i, "w")
+    fill = (
+        company.to_string()
+    )  # change df type obj to str, only string type data can be written to file
     f.write(fill)
     f.close()
-print('Done')
+print("Done")
 """
-
 """
 class Input:
     def __init__(self):
@@ -62,6 +62,16 @@ class Input:
 
 input_obj = Input()
 """
+for i in name_arr:
+    company = df[(df["Name"] == i) & (df["Sector"] == "Information Technology")]
+    f = open("infoTech_datasets/%s.csv" % i, "w")
+    fill = (
+        company.to_string()
+    )  # change df type obj to str, only string type data can be written to file
+    f.write(fill)
+    f.close()
+print("Done")
+
 """
 for i in name_arr:
     for j in name_arr:
