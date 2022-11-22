@@ -31,22 +31,31 @@ name_arr = df.get(
 name_arr.drop_duplicates(
     inplace=True
 )  # inplace ensures a new obj is not returned, rather duplicate values are removed on the passed obj
-"""
-for i in name_arr:
-    print(i)
 
-    company = df[df["Name"] == i]
+company = df[df["Sector"] == "Information Technology"]
 
-    f = open("datasets/%s.csv" % i, "w")
-    fill = (
-        company.to_string()
-    )  # change df type obj to str, only string type data can be written to file
-    f.write(fill)
-    f.close()
+infoTechSector_name_arr = company.get("Name")
+infoTechSector_name_arr.drop_duplicates(inplace=True)
+
+itr = 0
+
+for i in infoTechSector_name_arr:
+    if itr == 5:
+        break
+
+    indivComp = company[company["Name"] == i]
+
+    indivComp.to_csv("datasets/%s.csv" % i, sep=",")
+
+    itr += 1
+
 print("Done")
-"""
+
 """
 class Input:
+     company = df[df["Name"] == i]
+
+    company.to_csv("datasets/%s.csv" % i, sep=",")
     def __init__(self):
         self.check_errors = False 
         self.type_dtw = "i"
@@ -60,11 +69,6 @@ class Input:
 
 input_obj = Input()
 """
-
-infoTech = df[df["Sector"] == "Information Technology"]
-infoTech.drop_duplicates(inplace=True)
-print(infoTech["Name"].to_string())
-
 """
 for i in name_arr:
     for j in name_arr:
