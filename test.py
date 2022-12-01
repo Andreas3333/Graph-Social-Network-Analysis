@@ -21,7 +21,7 @@ str = str(df)
 f.write(str)
 ////////////////////////////////////////////
 """
-
+"""
 df = pd.read_csv("final_Dataset.csv", sep=",", lineterminator="\r")
 
 name_arr = df.get(
@@ -50,6 +50,7 @@ for i in infoTechSector_name_arr:
     itr += 1
 
 print("Done")
+"""
 
 """
 class Input:
@@ -85,3 +86,14 @@ for i in name_arr:
 
 print("Done")
 """
+from dtwParallel import dtw_functions as dtw
+from scipy.spatial import distance
+import numpy as np
+
+
+X = np.array([[3, 5, 8], [5, 1, 9]])
+
+Y = np.array([[2, 0, 8], [4, 3, 8]])
+
+x = dtw_functions.dtw(X, Y, "d", distance.euclidean, MTS=True)
+print(x)
