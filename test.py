@@ -71,21 +71,18 @@ class Input:
     def __init__(self):
         self.check_errors = False 
         self.type_dtw = "i"
-        self.MTS = True
+        self.MTS = False
         self.n_threads = -1
         self.distance = "dtw"
         self.visualization = False
-        self.output_file = True
+        self.output_file = False
         self.DTW_to_kernel = False
         self.sigma_kernel = 1
 
 input_obj = Input()
-'''
 
 
-
-
-df_1 = pd.read_csv('datasets/Accenture.csv', sep=',', lineterminator='\n')
+df_1 = pd.read_csv('datasets/Accenture.csv', sep=',')
 df_2 = pd.read_csv('datasets/Adobe.csv', sep=',', lineterminator='\r')
 df_3 = pd.read_csv('datasets/AdvancedMicroDevices.csv', sep=',', lineterminator='\r')
 df_4 = pd.read_csv('datasets/AkamaiTechnologies.csv', sep=',', lineterminator='\r')
@@ -93,29 +90,44 @@ df_5 = pd.read_csv('datasets/Amphenol.csv', sep=',', lineterminator='\r')
 
 #attributes = df_1.head(0) #list of data file attributes
 
-#need to create one dimensianl array of Open Values
-
 open_1 = np.array(df_1.Open.to_numpy(dtype=int), ndmin=1)
 open_2 = np.array(df_2.Open.to_numpy(dtype=int), ndmin=1)
 open_3 = np.array(df_3.Open.to_numpy(dtype=int), ndmin=1)
 open_4 = np.array(df_4.Open.to_numpy(dtype=int), ndmin=1)
 open_5 = np.array(df_5.Open.to_numpy(dtype=int), ndmin=1)
 
-print(open_1.shape[1])
-'''
+
+#print(open_1.shape[1])
+
 data_list = [open_1, open_2, open_3, open_4, open_5]
 distance_metric = d.euclidean
 
 for x in data_list:
     for y in data_list:
         
-        # API call. 
-        dist_matrix = np.array(dtw_functions.dtw_ind(x, y, distance_metric))
+'''
+#distance = d.euclidean
+#list_1=[1,2,3]
+#list_2=[0,0,1]
+      
+# API call. 
+#dist_matrix = np.array(dtw_functions.dtw(list_1, list_2, dist=distance_metric))
+#dtw_functions.dtw(list_1,list_2,distance)
 
-
+#dtw_functions.dtw(
 #agregate distance arrays of companies in to a distance matrix
 #for some threashold-
 #transform distance array into adj list
-#from adj list verticie and edge list
-'''
+#from adj list create verticie and edge list
+from dtwParallel import dtw_functions
+from scipy.spatial import distance as d
+
+# For Univariate Time Series
+x = [4,2,8,4,5]
+y = [0,1,0,8,9]
+
+distance = d.euclidean
+visualization=True
+_ = dtw_functions.dtw(x,y,distance, get_visualization=visualization)
+
 print('Done')
