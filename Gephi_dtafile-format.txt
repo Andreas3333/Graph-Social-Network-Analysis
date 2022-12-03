@@ -3,11 +3,11 @@ Gephi dataformat:
 
 Nodes: node.csv file
 consist of columns-
-,CompanyName,node_id
+,CompanyName(str),node_id(int64)
 
 
 Edge table: edge_table.csv file
 consits of columns-
-,Source,Target
-(node_id),(node_id)
+,Source(node_id),Target(node_id), weight(int64)-if included
+
 
