@@ -97,3 +97,12 @@ Y = np.array([[2, 0, 8], [4, 3, 8]])
 
 x = dtw_functions.dtw(X, Y, "d", distance.euclidean, MTS=True)
 print(x)
+
+
+# For Univariate Time Series
+x = np.array([1, 2, 3])
+y = np.array([0, 0, 1])
+
+distance = distance.euclidean
+u = dtw_functions.dtw(x, y, distance)
+print(u)
