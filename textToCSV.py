@@ -3,7 +3,11 @@ import csv
 import json
 
 df = pd.read_csv(
-    "node_edge.txt", sep=r"\s+", header=None, names=["N", "M", "W"], engine="python"
+    "node_edge_updated.txt",
+    sep=r"\t+",
+    header=None,
+    names=["Source", "Target"],
+    engine="python",
 )
 
-df.to_csv("node_edge.cvs", sep=",", index=False)
+df.to_csv("node_egde_updated.cvs", sep=",", index=False)
