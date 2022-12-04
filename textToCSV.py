@@ -10,4 +10,4 @@ df = pd.read_csv(
     engine="python",
 )
 
-df.to_csv("node_egde_updated.cvs", sep=",", index=False)
+df.to_csv("node_egde_updated.csv", sep=",", index=False)
